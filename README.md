@@ -1,2 +1,2 @@
-# AR,-Palindrome-Indicator
+# ARM-Palindrome-Indicator
 VisUAL(ARM) was used.
