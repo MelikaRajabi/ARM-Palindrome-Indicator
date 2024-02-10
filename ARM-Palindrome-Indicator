@@ -1,0 +1,42 @@
+inputString		DCD		'a', 'b', 'c', 'd', 'e'    ;Enter the input string here
+inputStringLength	DCD		5					  ;Enter the number of its characters here
+				
+				;		Storing the address of the string in a register
+				LDR		R1, =inputString
+				
+				;		Storing the number of the last bit of the input in a register
+				LDR		R2, =inputStringLength
+				LDR		R2, [R2]
+				ADD		R2, R2, #-1
+				LSL		R2, R2, #2
+				
+				;		Defining the register iterating from the beginning of the string
+				ADD		R3, R0, #0
+				
+LOOP
+				;		Iterating on the string from the beginning and the end
+				LDR		R4, [R1, R3]
+				LDR		R5, [R1, R2]
+				
+				ADD		R2, R2, #-4
+				ADD		R3, R3, #4
+				;		If all first and corresponding last registers are equal: Palin
+				CMP		R3, R2
+				BGE		Palin
+				
+				;		If even one register is different: NonPalin
+				TEQ		R4, R5
+				BEQ		LOOP
+				
+				B		NonPalin
+				
+Palin
+				;		If Palin: SET R9 TO 1
+				ADD		R9, R0, #1
+				END
+				
+NonPalin
+				;		If NonPalin: SET R9 TO 0
+				ADD		R9, R0, #0
+				END
+				
